@@ -50,7 +50,7 @@ public class 分割回文串 {
 
     public static void main(String[] args) {
         分割回文串 res = new 分割回文串();
-        String s = "abbab";
+        String s = "bbbbbbbbbbbbbbbb";
         List<List<String>> lists = res.partition(s);
         for (List<String> l:lists) {
             for (String str : l) {
