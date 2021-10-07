@@ -1,5 +1,10 @@
 package 杂类;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+
 /**
  * Title: 二进制矩阵中的最短路径1091
  * Description: TODO
@@ -9,47 +14,62 @@ package 杂类;
  * @date 2021-10-07
  */
 public class 二进制矩阵中的最短路径1091 {
-    private int res;
+
     private static final int[][] DIRECTION = {{-1,0},{1,0},{0,-1},{0,1},{-1,-1},{-1,1},{1,-1},{1,1}};
     public int shortestPathBinaryMatrix(int[][] grid) {
-        if (grid[0][0] != 0 || grid[grid.length - 1][grid[0].length - 1] != 0) {
+        int row = grid.length;
+        int col = grid[0].length;
+
+        if (grid[0][0] == 1 || grid[row - 1][col - 1] == 1) {
             return -1;
         }
-        res = Integer.MAX_VALUE;
-        boolean[][] visited = new boolean[grid.length][grid[0].length];
-        visited[0][0] = true;
-        if (dfs(grid, visited, 0, 0, 0)) {
-            return res + 1;
-        }
-        return -1;
-    }
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
+        Set<Integer> visited = new HashSet<>();
+        set1.add(0);
+        set2.add((row - 1) * 10000 + col - 1);
+        int step = 1;
+        while (!set1.isEmpty()) {
+            Set<Integer> tmp = new HashSet<>();
 
-    private boolean dfs (int[][] grid, boolean[][] visited, int x, int y, int count) {
-        if (x == grid.length - 1 && y == grid[0].length - 1) {
-            res = Math.min(res, count);
-            return true;
-        }
-
-        for (int[] d : DIRECTION) {
-            int nx = x + d[0];
-            int ny = y + d[1];
-
-            if (nx >= 0 && nx < grid.length && ny >= 0 && ny < grid[0].length
-                    && !visited[nx][ny] && grid[nx][ny] == 0) {
-                visited[nx][ny] = true;
-                if (dfs(grid, visited, nx, ny, count + 1)) {
-                    return true;
+            for (Integer xy : set1) {
+                if (visited.contains(xy)) {
+                    continue;
                 }
-                visited[nx][ny] = false;
+                if (set2.contains(xy)) {
+                    return step;
+                }
+                visited.add(xy);
+                int x = xy / 10000;
+                int y = xy % 10000;
+                for (int[] d : DIRECTION) {
+                    int nx = x + d[0];
+                    int ny = y + d[1];
+                    if (nx >= 0 && nx < row && ny >= 0 && ny < col
+                            && grid[nx][ny] == 0) {
+                        if (visited.contains(nx * 10000 + ny)) {
+                            continue;
+                        }
+                        tmp.add(nx * 10000 + ny);
+                    }
+                }
+            }
+            step++;
+            if (set2.size() <= tmp.size()) {
+                set1 = set2;
+                set2 = tmp;
+            } else {
+                set1 = tmp;
             }
         }
-        return false;
+        return -1;
 
     }
 
     public static void main(String[] args) {
         二进制矩阵中的最短路径1091 res = new 二进制矩阵中的最短路径1091();
         int[][] grid = {{0,0,0},{1,1,0},{1,1,0}};
+//        int[][] grid = {{0,1},{1,0}};
         System.out.println(res.shortestPathBinaryMatrix(grid));
     }
 
