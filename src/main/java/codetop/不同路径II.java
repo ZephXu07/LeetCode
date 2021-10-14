@@ -37,27 +37,23 @@ public class 不同路径II {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
         int row = obstacleGrid.length;
         int col = obstacleGrid[0].length;
-
-        if (obstacleGrid[row - 1][col - 1] == 1) {
-            return 0;
-        }
-        int[][] dp = new int[2][col];
-        dp[(row - 1) & 1][col - 1] = 1;
-
-        for (int i = row - 1; i >= 0; i--) {
-            for (int j = col - 1; j >= 0; j--) {
-                if (obstacleGrid[i][j] == 1) {
-                    continue;
+        int[] dp = new int[col];
+        //起点可能有障碍物
+        dp[0] = (obstacleGrid[0][0] == 1) ? 0 : 1;
+        for(int i = 0; i < row; ++i) {
+            for(int j = 0; j < col; ++j) {
+                //有障碍物的格子直接赋0
+                if(obstacleGrid[i][j] == 1) {
+                    dp[j] = 0;
                 }
-                if (i + 1 < row) {
-                    dp[i & 1][j] += dp[(i + 1) & 1][j];
-                }
-                if (j + 1 < col) {
-                    dp[i & 1][j] += dp[i & 1][j + 1];
+                //否则dp[j]的值由左方和上一次迭代的dp[j]累加而来
+                else if(obstacleGrid[i][j] == 0 && j - 1 >= 0) {
+                    dp[j] = dp[j] + dp[j - 1];
                 }
             }
         }
-        return dp[0][0];
+        return dp[col - 1];
+
     }
 
 }
