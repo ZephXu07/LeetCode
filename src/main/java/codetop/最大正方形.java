@@ -106,6 +106,8 @@ public class 最大正方形 {
                         说明在 matrix[i][j] 周围的三个格子有一个为 0 ，
                         此时最大也就是自身的小格子，边长为 1
                    如果这三个值不为 0 ，画图吧，我解释不了……
+                   https://pic.leetcode-cn.com/
+                   8c4bf78cf6396c40291e40c25d34ef56bd524313c2aa863f3a20c1f004f32ab0-image.png
 
          */
 
