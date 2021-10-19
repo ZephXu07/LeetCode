@@ -13,12 +13,10 @@ public class 实现前缀树062 {
 }
 class Trie {
     private Node root;
-    /** Initialize your data structure here. */
     public Trie() {
         root = new Node();
     }
 
-    /** Inserts a word into the trie. */
     public void insert(String word) {
         int len = word.length();
         Node cur = root;
@@ -34,7 +32,6 @@ class Trie {
     }
 
 
-    /** Returns if the word is in the trie. */
     public boolean search(String word) {
         Node cur = root;
         for (int i = 0; i < word.length(); i++) {
