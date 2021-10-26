@@ -95,6 +95,8 @@ public class 值和下标之差都在给定的范围内057 {
             if (map.containsKey(l) && x - map.get(l) <= t) {
                 //根据算法，左边数肯定小于右边数，因此调整减数与被减数，无需绝对值
                 //左桶存在，说明在2t范围内 [0, 2t]可能有 [0,t]差值的数，于是相减判断，若有则返回
+                //左桶只有一个数，否则多个数则满足 [0,t]直接返回
+
                 return true;
             }
             if (map.containsKey(r) && map.get(r) - x <= t) {
