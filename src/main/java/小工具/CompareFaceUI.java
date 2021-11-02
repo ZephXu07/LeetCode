@@ -7,7 +7,7 @@ package 小工具;/**
  * @date 2021-10-06
  */
 
-import com.alibaba.fastjson.JSONObject;
+
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.common.profile.ClientProfile;
@@ -15,28 +15,23 @@ import com.tencentcloudapi.common.profile.HttpProfile;
 import com.tencentcloudapi.iai.v20200303.IaiClient;
 import com.tencentcloudapi.iai.v20200303.models.CompareFaceRequest;
 import com.tencentcloudapi.iai.v20200303.models.CompareFaceResponse;
-import com.tencentcloudapi.tci.v20190318.models.Person;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import lombok.Data;
 import sun.misc.BASE64Encoder;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.util.List;
 import java.util.Objects;
 
 
